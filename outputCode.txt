@@ -1,0 +1,209 @@
+/*
+This code is a C# implementation of various physics calculations related to water properties. It includes functions to calculate water density, speed of sound in water, gravity at sea level, depth by pressure, pressure by depth, vertical sound path, and freezing temperature of seawater. The code defines a struct called TSProfilePoint, which represents a point in a vertical temperature-salinity profile. It has three fields: Z (vertical coordinate), T (temperature), and S (salinity). The code also defines a static class called PHX, which contains various constants and methods for performing the physics calculations. The constants defined in the PHX class include the density of fresh water at 20°C, the speed of sound in water, the minimum and maximum values for the speed of sound, the salinity of fresh water, the acceleration due to gravity at sea level, and the average atmospheric pressure at sea level. The code also includes some obsolete methods that have been replaced by newer methods. These methods are marked with the [Obsolete] attribute. The PHX class includes several methods for performing the physics calculations. These methods include: - Water_density_calc: Calculates the in situ density of water based on temperature, pressure, and salinity. - Speed_of_sound_UNESCO_calc: Calculates the speed of sound in water based on temperature, pressure, and salinity using the UNESCO equation. - Gravity_constant_wgs84_calc: Calculates the gravity at sea level based on latitude using the WGS84 ellipsoid gravity formula. - Depth_by_pressure_calc: Calculates the depth (distance from the water surface) based on pressure, atmospheric pressure, water density, and gravity acceleration. - Pressure_by_depth_calc: Calculates the pressure of a water column based on depth, atmospheric pressure, water density, and gravity acceleration. - Depth_by_pressure_ts_profile: Calculates the depth based on pressure using a given TS-profile (vertical temperature-salinity profile). - Vertical_sound_path_ts_profile: Calculates the vertical sound path between the water surface and the deepest point based on time of flight and a given TS-profile. - Water_fpoint_calc: Calculates the freezing temperature of seawater based on pressure and salinity. Overall, this code provides a set of useful functions for performing physics calculations related to water properties.
+*/
+
+package main
+
+import (
+	"math"
+)
+
+type TSProfilePoint struct {
+	Z float64
+	T float64
+	S float64
+}
+
+const (
+	PHX_FWTR_DENSITY_KGM3        = 998.02  // Fresh water density at 20°C
+	PHX_FWTR_SOUND_SPEED_MPS     = 1500.0  // Default speed of sound in water
+	PHX_FWTR_SOUND_SPEED_MPS_MIN = 1300.0  // Min value for speed of sound
+	PHX_FWTR_SOUND_SPEED_MPS_MAX = 1600.0  // Max value for speed of sound
+	PHX_FWTR_SALINITY_PSU        = 0.0     // Default water salinity, PSU
+	PHX_GRAVITY_ACC_MPS2         = 9.80665 // ISO 80000-3:2006
+	PHX_ATM_PRESSURE_MBAR        = 1013.25 // Average at sea level
+)
+
+func Linterp(x1, y1, x2, y2, x float64) float64 {
+	return y1 + (x-x1)*(y2-y1)/(x2-x1)
+}
+
+func Water_density_calc(t, p, s float64) float64 {
+	p = p / 1000.0
+	sr := math.Sqrt(math.Abs(s))
+	sig := (((4.8314E-4 * s) +
+		((-1.6546E-6 * t + 1.0227E-4) * t - 5.72466E-3) * sr +
+		((5.3875E-9 * t - 8.2467E-7) * t + 7.6438E-5) * t - 4.0899E-3) * t + 0.824493) * s +
+		((((6.536332E-9 * t - 1.120083E-6) * t + 1.001685E-4) * t - 9.095290E-3) * t + 6.793952E-2) * t - 0.157406
+
+	b := ((9.1697E-10 * t + 2.0816E-8) * t - 9.9348E-7) * s + (5.2787E-8*t - 6.12293E-6)*t + 8.50935E-5
+
+	k0 := (((((-5.3009E-4 * t + 1.6483E-2) * t + 7.944E-2) * sr) +
+		((-6.1670E-5 * t + 1.09987E-2) * t - 0.603459) * t + 54.6746) * s) +
+		(((-5.155288E-5 * t + 1.360477E-2) * t - 2.327105) * t + 148.4206) * t + 19652.21
+
+	a := (1.91075E-4*sr + (-1.6078E-6*t-1.0981E-5)*t + 2.2838E-3)*s +
+		((-5.77905E-7*t + 1.16092E-4)*t + 1.43713E-3)*t + 3.239908
+
+	k := (b*p + a)*p + k0
+
+	return 1000.0 + (k*sig+1000.0*p)/(k-p)
+}
+
+func Speed_of_sound_UNESCO_calc(t, p, s float64) float64 {
+	p = p / 1000.0
+	sr := math.Sqrt(math.Abs(s))
+
+	d := 1.727E-3 - 7.9836E-6*p
+
+	b_1 := 7.3637E-5 + 1.7945E-7*t
+	b_0 := -1.922E-2 - 4.42E-5*t
+	b := b_0 + b_1*p
+
+	a_3 := (-3.389E-13*t + 6.649E-12) * t + 1.100E-10
+	a_2 := ((7.988E-12*t - 1.6002E-10) * t + 9.1041E-9) * t - 3.9064E-7
+	a_1 := (((-2.0122E-10*t + 1.0507E-8) * t - 6.4885E-8) * t - 1.2580E-5) * t + 9.4742E-5
+	a_0 := (((-3.21E-8*t + 2.006E-6) * t + 7.164E-5) * t - 1.262E-2) * t + 1.389
+	a := ((a_3*p + a_2)*p + a_1)*p + a_0
+
+	c_3 := (-2.3643E-12*t + 3.8504E-10) * t - 9.7729E-9
+	c_2 := (((1.0405E-12*t - 2.5335E-10) * t + 2.5974E-8) * t - 1.7107E-6) * t + 3.1260E-5
+	c_1 := (((-6.1185E-10*t + 1.3621E-7) * t - 8.1788E-6) * t + 6.8982E-4) * t + 0.153563
+	c_0 := ((((3.1464E-9*t - 1.47800E-6) * t + 3.3420E-4) * t - 5.80852E-2) * t + 5.03711) * t + 1402.388
+	c := ((c_3*p + c_2)*p + c_1)*p + c_0
+
+	return c + (a+b*sr+d*s)*s
+}
+
+func Gravity_constant_wgs84_calc(phi float64) float64 {
+	phi_sq := math.Sin(phi*math.Pi/180.0)
+	phi_sq *= phi_sq
+	return (9.7803253359 * ((1.0 + 0.00193185265241*phi_sq) / math.Sqrt(1.0-0.00669437999013*phi_sq)))
+}
+
+func Depth_by_pressure_calc(p, p0, rho, g float64) float64 {
+	return 100.0 * (p - p0) / (rho * g)
+}
+
+func Pressure_by_depth_calc(h, p0, rho, g float64) float64 {
+	return h * rho * g / 100.0 + p0
+}
+
+func Depth_by_pressure_ts_profile(pm, p0, g float64, n_p int, ts_profile []TSProfilePoint) float64 {
+	if n_p <= 0 {
+		panic("Specified number of time intervals Nt should be greater than zero")
+	}
+
+	if len(ts_profile) < 2 {
+		panic("tsProfile has to contain at least two points")
+	}
+
+	t1 := ts_profile[0].T
+	s1 := ts_profile[0].S
+	rho0 := Water_density_calc(t1, p0, s1)
+	p1 := Pressure_by_depth_calc(ts_profile[0].Z, p0, rho0, g)
+	pe := Pressure_by_depth_calc(ts_profile[len(ts_profile)-1].Z, p0, rho0, g)
+
+	if pm < p1 || pm > pe {
+		panic("Specified pressure is beyond the specified TS-profile")
+	}
+
+	p_idx := 1
+	t2 := ts_profile[p_idx].T
+	s2 := ts_profile[p_idx].S
+	p2 := Pressure_by_depth_calc(ts_profile[p_idx].Z, p0, rho0, g)
+
+	dp := (pm - p0) / float64(n_p)
+	h := 0.0
+	var rho, t, p, s float64
+
+	for p < pm {
+		p += dp
+
+		if p > p2 {
+			p1 = p2
+			t1 = t2
+			s1 = s2
+			p_idx += 1
+
+			t2 = ts_profile[p_idx].T
+			s2 = ts_profile[p_idx].S
+			p2 = Pressure_by_depth_calc(ts_profile[p_idx].Z, p0, rho0, g)
+		}
+
+		t = Linterp(p1, t1, p2, t2, p)
+		s = Linterp(p1, s1, p2, s2, p)
+
+		rho = Water_density_calc(t, p, s)
+		h += 1.0 / rho
+	}
+
+	return h * 100.0 * dp / g
+}
+
+func Vertical_sound_path_ts_profile(tof, g float64, n_t int, ts_profile []TSProfilePoint) float64 {
+	if len(ts_profile) < 2 {
+		panic("tsProfile has to contain at least two points")
+	}
+
+	if n_t <= 0 {
+		panic("Specified number of time intervals Nt should be greater than zero")
+	}
+
+	z1 := ts_profile[0].Z
+	t1 := ts_profile[0].T
+	s1 := ts_profile[0].S
+	rho0 := Water_density_calc(t1, PHX_ATM_PRESSURE_MBAR, s1)
+	p1 := Pressure_by_depth_calc(z1, PHX_ATM_PRESSURE_MBAR, rho0, g)
+
+	v := Speed_of_sound_UNESCO_calc(t1, p1, s1)
+
+	if v*tof > ts_profile[len(ts_profile)-1].Z {
+		panic("Specified time of flight is beyond the specified TS-profile")
+	}
+
+	p_idx := 1
+	z2 := ts_profile[p_idx].Z
+	t2 := ts_profile[p_idx].T
+	s2 := ts_profile[p_idx].S
+	p2 := Pressure_by_depth_calc(z2, PHX_ATM_PRESSURE_MBAR, rho0, g)
+
+	dt := tof / float64(n_t)
+	h := 0.0
+	var t, p, s, tt float64
+
+	for tt < tof {
+		tt += dt
+		h = h + dt*v
+
+		if h > z2 {
+			p1 = p2
+			t1 = t2
+			s1 = s2
+			z1 = z2
+			p_idx = p_idx + 1
+
+			z2 = ts_profile[p_idx].Z
+			t2 = ts_profile[p_idx].T
+			s2 = ts_profile[p_idx].S
+			p2 = Pressure_by_depth_calc(z2, PHX_ATM_PRESSURE_MBAR+p1, rho0, g)
+		}
+
+		t = Linterp(z1, t1, z2, t2, h)
+		p = Linterp(z1, p1, z2, p2, h)
+		s = Linterp(z1, s1, z2, s2, h)
+		v = Speed_of_sound_UNESCO_calc(t, p, s)
+	}
+
+	return h
+}
+
+func Water_fpoint_calc(p, s float64) float64 {
+	return (-0.0575 + 1.710523E-3*math.Sqrt(s) - 2.154996E-4*s)*s - 7.53E-6*p
+}
+
+func main() {
+	// Code for testing the translation
+}
+
+
