@@ -8,3 +8,8 @@ Using:
 - https://github.com/Vytek/SeaWarfareSimulatorServer
 - https://github.com/Vytek/SeaWarfareSimulatorClient
 - https://github.com/Vytek/MayaVerseGolang
+
+Services:
+
+- https://openweathermap.org/api
+- https://www.opentopodata.org/datasets/gebco2020/
