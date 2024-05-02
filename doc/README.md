@@ -1,4 +1,4 @@
-Reference:
+SONAR Reference:
 
 - http://www.sonar-info.info/
 - http://www.sonar-info.info/p16/ur2.pdf
@@ -8,3 +8,5 @@ Reference:
 - https://core.ac.uk/download/pdf/36713035.pdf
 - https://ocw.mit.edu/courses/2-011-introduction-to-ocean-science-and-engineering-spring-2006/download/
   - https://ocw.mit.edu/courses/2-011-introduction-to-ocean-science-and-engineering-spring-2006/resources/hw5_sonar_leonar/
+- https://dspace.mit.edu/bitstream/handle/1721.1/36876/13-00Fall-2002/NR/rdonlyres/Ocean-Engineering/13-00Introduction-to-Ocean-Science-and-TechnologyFall2002/D629E305-6EC8-4664-B7A4-AF44152E54B4/0/1300_acoustics_lecture_notes.pdf
+- https://www.uio.no/studier/emner/matnat/ifi/INF-GEO4310/h12/undervisningsmateriale/sonar_introduction_2012_compressed.pdf
