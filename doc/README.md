@@ -12,7 +12,7 @@ SONAR Reference:
 - https://www.uio.no/studier/emner/matnat/ifi/INF-GEO4310/h12/undervisningsmateriale/sonar_introduction_2012_compressed.pdf
 - https://dosits.org/science/advanced-topics/sonar-equation/sonar-equation-example-passive-sonar/
 
-## SL 
+## NL 
 Rumore spettrale del mare: https://www.betasom.it/forum/index.php?/topic/49098-sonar-computazioni-del-livello-del-rumore-del-mare-in-visual-basic/
 
 ## TL
