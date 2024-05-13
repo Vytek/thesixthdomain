@@ -19,9 +19,9 @@ Rumore spettrale del mare: https://www.betasom.it/forum/index.php?/topic/49098-s
 Attenuazione: https://www.betasom.it/forum/index.php?/topic/49100-sonar-calcolo-dell%E2%80%99attenuazione-del-suono-in-mare-con-routine-in-visual-basic/
 
 ## Procedura
-https://www.betasom.it/forum/index.php?/topic/49058-sonar-routine-in-visual-basic-per-la-determinazione-grafica-della-portata-r-di-un-apparato-idrofonico/
-https://www.betasom.it/forum/index.php?/topic/49047-sonar-procedura-di-calcolo-automatico-delle-variabili-che-definiscono-la-componente-passiva/
-https://it.wikiversity.org/wiki/Calcolatore_per_la_simulazione_delle_variabili_di_un_sonar_passivo
+- https://www.betasom.it/forum/index.php?/topic/49058-sonar-routine-in-visual-basic-per-la-determinazione-grafica-della-portata-r-di-un-apparato-idrofonico/
+- https://www.betasom.it/forum/index.php?/topic/49047-sonar-procedura-di-calcolo-automatico-delle-variabili-che-definiscono-la-componente-passiva/
+- https://it.wikiversity.org/wiki/Calcolatore_per_la_simulazione_delle_variabili_di_un_sonar_passivo
 
 ## Zona d'Ombra
 https://betasom.it/forum/index.php?/topic/49114-sonar-zona-dombra-nella-scoperta-dei-bersagli-sintetico/
