@@ -22,6 +22,8 @@ Attenuazione: https://www.betasom.it/forum/index.php?/topic/49100-sonar-calcolo-
 - https://www.betasom.it/forum/index.php?/topic/49058-sonar-routine-in-visual-basic-per-la-determinazione-grafica-della-portata-r-di-un-apparato-idrofonico/
 - https://www.betasom.it/forum/index.php?/topic/49047-sonar-procedura-di-calcolo-automatico-delle-variabili-che-definiscono-la-componente-passiva/
 - https://it.wikiversity.org/wiki/Calcolatore_per_la_simulazione_delle_variabili_di_un_sonar_passivo
+- http://www.sonar-info.info/p72/72pagina.html
+- http://www.sonar-info.info/p70/70pagina.html
 
 ## Zona d'Ombra
 https://betasom.it/forum/index.php?/topic/49114-sonar-zona-dombra-nella-scoperta-dei-bersagli-sintetico/
