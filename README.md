@@ -1,6 +1,8 @@
 # thesixthdomain
 Simulation War Games
 
+![thesixthdomain](https://github.com/Vytek/thesixthdomain/blob/main/doc/Logo.jpeg?raw=true)
+
 ITA:
 
 ## Cosa vorrei realizzare
