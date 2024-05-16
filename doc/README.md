@@ -24,6 +24,7 @@ Attenuazione: https://www.betasom.it/forum/index.php?/topic/49100-sonar-calcolo-
 - https://it.wikiversity.org/wiki/Calcolatore_per_la_simulazione_delle_variabili_di_un_sonar_passivo
 - http://www.sonar-info.info/p72/72pagina.html
 - http://www.sonar-info.info/p70/70pagina.html
+- https://www.betasom.it/forum/index.php?/topic/48911-3-sonar-probabilita-di-scoperta-e-falso-allarme/
 
 ## Zona d'Ombra
 https://betasom.it/forum/index.php?/topic/49114-sonar-zona-dombra-nella-scoperta-dei-bersagli-sintetico/
