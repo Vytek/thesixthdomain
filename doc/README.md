@@ -15,6 +15,10 @@ SONAR Reference:
 ## NL 
 Rumore spettrale del mare: https://www.betasom.it/forum/index.php?/topic/49098-sonar-computazioni-del-livello-del-rumore-del-mare-in-visual-basic/
 
+## SL
+- Rumore di CT (Caccia Torpediniere): https://it.wikiversity.org/wiki/Rumore_delle_navi
+- http://www.sonar-info.info/p159/runavi.pdf
+
 ## TL
 Attenuazione: https://www.betasom.it/forum/index.php?/topic/49100-sonar-calcolo-dell%E2%80%99attenuazione-del-suono-in-mare-con-routine-in-visual-basic/
 
