@@ -32,6 +32,7 @@ Services:
 
 - https://openweathermap.org/api
 - https://www.opentopodata.org/datasets/gebco2020/
+- https://isitwater.com/
 
 Library:
 
