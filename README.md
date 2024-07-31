@@ -33,8 +33,10 @@ Services:
 - https://openweathermap.org/api
 - https://www.opentopodata.org/datasets/gebco2020/
 - https://isitwater.com/
+- https://github.com/open-meteo/open-meteo
 
 Library:
 
 - https://github.com/go-resty/resty
 - https://github.com/nathan-osman/go-sunrise
+- https://github.com/HectorMalot/omgo
