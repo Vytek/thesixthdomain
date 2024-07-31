@@ -40,3 +40,4 @@ Library:
 - https://github.com/go-resty/resty
 - https://github.com/nathan-osman/go-sunrise
 - https://github.com/HectorMalot/omgo
+- https://github.com/Vytek/tsd_passivesonar
