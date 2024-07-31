@@ -37,3 +37,4 @@ Services:
 Library:
 
 - https://github.com/go-resty/resty
+- https://github.com/nathan-osman/go-sunrise
