@@ -7,7 +7,10 @@ ITA:
 
 ## Cosa vorrei realizzare
 
-I Board War Games 2D e 3D usano spesso semplici sistemi statistici per modelizzare a vario livello battaglie od intere campagne considerando il fattore casuale in vario modo. 
+I Board War Games 2D e 3D usano spesso semplici sistemi statistici per modelizzare a vario livello battaglie od intere campagne considerando il fattore casuale in vario modo. Ma se come dice Galileo "la natura è scritta in linguaggio matematico" allora anche la guerra è scritta in linguaggio matematico. 
+
+![Tutto è equazioni](https://github.com/Vytek/thesixthdomain/doc/all_i_see_are_equations.png?raw=true)
+
 Questo "serius game" vuole invece modelizzare e simulare un campo di battaglia virtuale utilizzando modelli matematici reali applicabili in un conflitto. Il primo obiettivo è quello di descrivere in dettaglio la posizione ed il movimento di mezzi militari (come primo dominio quello navale) usando il sistema di coordinate previsto dal protocollo/standard DIS: https://open-dis.github.io/dis-tutorial/
 
 Ogni mezzo è delineabile secondo questi moduli base (e per il momento ci occuperemo solo del primo): 
